@@ -1,9 +1,8 @@
 <?php
 
 //run python with shell exec()
-echo shell_exec("python /var/www/html/test/run_python_in_php/mkdir.py")
+$x=shell_exec("python /home/minerva/Desktop/programming/django/jobsproj/manage.py which_email Debitors notice - LB")
 
-//echo "minerva";
 
 
 
