@@ -1,9 +1,21 @@
 <?php
 
 //run python with shell exec()
-//$somequery = $_GET['query'];
-$result= shell_exec("python /home/minerva/Desktop/programming/django/jobsproj/manage.py which_email 'Debitors notice - LB'");
-var_dump($result); //output should be in here
+
+//$result= shell_exec("python -m http://localhost:8000/emailffa/36/");
+//var_dump($result); //output should be in here
+// create a new cURL resource
+$ch = curl_init();
+
+// set URL and other appropriate options
+curl_setopt($ch, CURLOPT_URL, "http://localhost:8000/emailffa/44/");
+
+
+// grab URL and pass it to the browser
+curl_exec($ch);
+
+
+?>
 
 
 
