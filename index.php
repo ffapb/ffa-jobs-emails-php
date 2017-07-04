@@ -1,7 +1,10 @@
 <?php
 
-//run python with shell exec()
 
+//run python with shell exec()
+//$somequery = $_GET['query'];
+//$result= shell_exec("python /home/minerva/Desktop/programming/django/jobsproj/manage.py which_email 'Debitors notice - LB'");
+//var_dump($result); //output should be in here
 
 //http://php.net/manual/en/function.curl-exec.php
 
@@ -9,7 +12,8 @@
 $ch = curl_init();
 
 // set URL and other appropriate options
-curl_setopt($ch, CURLOPT_URL, "http://localhost:8000/emailffa/36/");
+#curl_setopt($ch, CURLOPT_URL, "http://localhost:8000/emailffa/36/");
+curl_setopt($ch, CURLOPT_URL, "http://localhost:8000/emailffa/44/?asjson=true");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
 // grab URL and pass it to the browser
@@ -22,7 +26,7 @@ $buffer = curl_exec($ch);
 
 //http://php.net/manual/en/function.strip-tags.php
 
-
+/*
 $string  = strip_tags($buffer); 
 $string = str_replace("\r", '', $string);    // --- replace with empty space
 $string = str_replace("\n", '', $string);   // --- replace with space
@@ -30,7 +34,7 @@ $string = str_replace("\t", '', $string);   // --- replace with space
  $string = str_replace("&nbsp;", "\n", $string);  // --- replace &nbsp; with \n
 $string = trim(preg_replace('/ {2,}/', "\n", $string));  // ----- remove multiple spaces ----- 
 var_dump($string);
-
+*/
 
 //Result
 
@@ -43,7 +47,7 @@ var_dump($string);
 //d.adada@ffaprivatebank.com 
 //Developed by: Minerva Moawadt - 2017"
 
-
+var_dump(json_decode($buffer,true));
 
 
 
