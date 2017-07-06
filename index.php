@@ -13,8 +13,20 @@ $ch = curl_init();
 
 // set URL and other appropriate options
 #curl_setopt($ch, CURLOPT_URL, "http://localhost:8000/emailffa/36/");
-curl_setopt($ch, CURLOPT_URL, "http://localhost:8000/emailffa/44/?asjson=true");
+curl_setopt($ch, CURLOPT_URL, "http://localhost:8000/emailffa/?asjson=true");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+ 
+
+#https://groups.google.com/forum/#!topic/keen-io-devs/eV2yUmEF7-M
+$filters =array("id" => "50", "job_text" => "Treasury FFA017");	
+$filters_string = json_encode($filters);
+
+
+var_dump($filters_string);
+
+
+
+
 
 // grab URL and pass it to the browser
 //curl_exec($ch);
@@ -47,7 +59,7 @@ var_dump($string);
 //d.adada@ffaprivatebank.com 
 //Developed by: Minerva Moawadt - 2017"
 
-var_dump(json_decode($buffer,true));
+#var_dump(json_decode($buffer,true));
 
 
 
