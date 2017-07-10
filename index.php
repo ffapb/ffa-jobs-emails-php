@@ -1,6 +1,7 @@
 <?php
 
 
+function jobsproj(string $job_name) {
 //run python with shell exec()
 //$somequery = $_GET['query'];
 //$result= shell_exec("python /home/minerva/Desktop/programming/django/jobsproj/manage.py which_email 'Debitors notice - LB'");
@@ -16,15 +17,6 @@ $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, "http://localhost:8000/emailffa/?asjson=true");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
  
-
-#https://groups.google.com/forum/#!topic/keen-io-devs/eV2yUmEF7-M
-$filters =array("id" => "50", "job_text" => "Treasury FFA017");	
-$filters_string = json_encode($filters);
-
-
-var_dump($filters_string);
-
-
 
 
 
@@ -59,11 +51,28 @@ var_dump($string);
 //d.adada@ffaprivatebank.com 
 //Developed by: Minerva Moawadt - 2017"
 
-#var_dump(json_decode($buffer,true));
+$buffer = json_decode($buffer,true);
+#var_dump($buffer);
 
 
+#https://groups.google.com/forum/#!topic/keen-io-devs/eV2yUmEF7-M
+$filters = array_filter($buffer, function($x) use($job_name) { return $x["job_text"] == $job_name; });	
+#$filters_string = json_encode($filters);
+$filters = array_values($filters)[0]["job_id"];
 
+# var_dump($filters);
 
+# Take ID, and send again to jobsproj, to get list of emails
+curl_setopt($ch, CURLOPT_URL, "http://localhost:8000/emailffa/".$filters."/?asjson=true");
+$buffer = curl_exec($ch);
+$buffer = json_decode($buffer,true);
+$buffer = $buffer['email_set'];
+
+return $buffer;
+}
+
+var_dump(jobsproj("Treasury FFA017"));
+var_dump(jobsproj("BBG Price Recording - Lebanon"));
 ?>
 
 
