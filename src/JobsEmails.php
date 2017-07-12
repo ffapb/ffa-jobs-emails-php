@@ -2,7 +2,13 @@
 
 namespace FfaJobsEmails;
 
-function jobsEmails(string $url, string $job_name) {
+class JobsEmails {
+
+public function __construct(string $url) {
+  $this->url = $url;
+}
+
+public function getEmails(string $job_name) {
 //run python with shell exec()
 //$somequery = $_GET['query'];
 //$result= shell_exec("python /home/minerva/Desktop/programming/django/jobsproj/manage.py which_email 'Debitors notice - LB'");
@@ -14,8 +20,9 @@ function jobsEmails(string $url, string $job_name) {
 $ch = curl_init();
 
 // set URL and other appropriate options
-#curl_setopt($ch, CURLOPT_URL, $url+"/emailffa/36/");
-curl_setopt($ch, CURLOPT_URL, $url+"/emailffa/?asjson=true");
+#curl_setopt($ch, CURLOPT_URL, $this->url."/emailffa/36/");
+$url2 = $this->url."/emailffa/?asjson=true";
+curl_setopt($ch, CURLOPT_URL, $url2);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
  
 
@@ -27,7 +34,10 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
 $buffer = curl_exec($ch);
 
-
+// get http code before continuing
+$httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+if($httpcode==0) throw new \Exception(sprintf("Failed to fetch URL %s", $url2));
+if($httpcode!=200) throw new \Exception(sprintf("HTTP code %s returned from URL %s", $httpcode, $url2));
 
 //http://php.net/manual/en/function.strip-tags.php
 
@@ -58,16 +68,20 @@ $buffer = json_decode($buffer,true);
 
 #https://groups.google.com/forum/#!topic/keen-io-devs/eV2yUmEF7-M
 $filters = array_filter($buffer, function($x) use($job_name) { return $x["job_text"] == $job_name; });	
+
+if(count($filters)==0) throw new \Exception(sprintf("Job with name '%s' not found", $job_name));
 #$filters_string = json_encode($filters);
 $filters = array_values($filters)[0]["job_id"];
 
 # var_dump($filters);
 
 # Take ID, and send again to jobsproj, to get list of emails
-curl_setopt($ch, CURLOPT_URL, $url+"/emailffa/".$filters."/?asjson=true");
+curl_setopt($ch, CURLOPT_URL, $this->url."/emailffa/".$filters."/?asjson=true");
 $buffer = curl_exec($ch);
 $buffer = json_decode($buffer,true);
 $buffer = $buffer['email_set'];
 
 return $buffer;
 }
+
+} // end of class

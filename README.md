@@ -7,7 +7,13 @@ PHP library to access [ffa-jobs-emails](https://github.com/minerva22/ffa-jobs-em
 # Usage
 ```
 require_once 'vendor/autoload.php';
-$url = "http://localhost:8000";
-var_dump(\FfaJobsEmails\jobsEmails($url, "Treasury FFA017"));
-var_dump(\FfaJobsEmails\jobsEmails($url, "BBG Price Recording - Lebanon"));
+# require_once 'src/JobsEmails.php';
+$je = new \FfaJobsEmails\JobsEmails("http://localhost:8000");
+var_dump($je->jobsEmails("Treasury FFA017"));
+var_dump($je->jobsEmails("BBG Price Recording - Lebanon"));
+var_dump($je->getEmails("inexistant")); # throws exception
+
+$je = new \FfaJobsEmails\JobsEmails("http://inexistant:8000");
+var_dump($je->jobsEmails("Treasury FFA017")); # throws exception
+
 ```
