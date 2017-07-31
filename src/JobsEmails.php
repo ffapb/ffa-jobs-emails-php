@@ -20,7 +20,7 @@ public function getEmails(string $job_name) {
 $ch = curl_init();
 
 // set URL and other appropriate options
-#curl_setopt($ch, CURLOPT_URL, $this->url."/emailffa/36/");
+#curl_setopt($ch, CURLOPT_URL, $this->url."/36/");
 $url2 = $this->url."/?asjson=true";
 curl_setopt($ch, CURLOPT_URL, $url2);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -76,7 +76,7 @@ $filters = array_values($filters)[0]["job_id"];
 # var_dump($filters);
 
 # Take ID, and send again to jobsproj, to get list of emails
-curl_setopt($ch, CURLOPT_URL, $this->url."/emailffa/".$filters."/?asjson=true");
+curl_setopt($ch, CURLOPT_URL, $this->url."/".$filters."/?asjson=true");
 $buffer = curl_exec($ch);
 $buffer = json_decode($buffer,true);
 $buffer = $buffer['email_set'];
