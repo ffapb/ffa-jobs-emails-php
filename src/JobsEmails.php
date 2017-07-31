@@ -21,7 +21,7 @@ $ch = curl_init();
 
 // set URL and other appropriate options
 #curl_setopt($ch, CURLOPT_URL, $this->url."/emailffa/36/");
-$url2 = $this->url."/emailffa/?asjson=true";
+$url2 = $this->url."/?asjson=true";
 curl_setopt($ch, CURLOPT_URL, $url2);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
  
