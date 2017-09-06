@@ -1,10 +1,10 @@
 {
-    "name":"minerva22/ffa-jobs-emails",
-    "description":"PHP function to access ffa-jobs-emails API",
+    "name":"ffapb/ffa-jobs-settings",
+    "description":"PHP function to access ffa-jobs-settings API",
     "keywords":[],
     "type":"library",
     "license":"CC0 1.0 Universal",
-    "homepage": "https://github.com/minerva22/ffa-jobs-emails-php",
+    "homepage": "https://github.com/ffapb/ffa-jobs-settings-php",
     "authors":[
         {
             "name":"Minerva Moawad",
@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-4" : {
-           "FfaJobsEmails\\" : "src"
+           "FfaJobsSettings\\" : "src"
          }
     }
 }
