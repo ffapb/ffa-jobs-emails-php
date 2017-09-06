@@ -7,6 +7,8 @@ PHP library to access [ffa-jobs-settings](https://github.com/ffapb/ffa-jobs-sett
 `composer install ffapb/ffa-jobs-settings-php`
 
 # Usage
+
+To get list of emails of a particular job
 ```
 require_once 'vendor/autoload.php';
 # require_once 'src/JobsSettings.php';
@@ -20,4 +22,9 @@ var_dump($je->jobsEmails("Treasury FFA017")); # throws exception
 
 ```
 
-
+To get database credentials (IP, port, username, password, database name)
+```
+$db = new \FfaJobsSettings\Db("http://localhost:8000");
+var_dump($db->getConnectionSettings()); # shows credentials for databases the default "location"
+var_dump($db->getConnectionSettings("Beirut")); # shows credentials for databases in Beirut
+```
