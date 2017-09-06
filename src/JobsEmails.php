@@ -1,11 +1,11 @@
 <?php
 
-namespace FfaJobsEmails;
+namespace FfaJobsSettings;
 
 class JobsEmails {
 
 public function __construct(string $url) {
-  $this->url = $url;
+  $this->url = $url."/emailffa";
 }
 
 public function getEmails(string $job_name) {
@@ -63,7 +63,6 @@ var_dump($string);
 //Developed by: Minerva Moawadt - 2017"
 
 $buffer = json_decode($buffer,true);
-#var_dump($buffer);
 
 
 #https://groups.google.com/forum/#!topic/keen-io-devs/eV2yUmEF7-M
