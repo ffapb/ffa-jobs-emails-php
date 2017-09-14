@@ -4,7 +4,7 @@ PHP library to access [ffa-jobs-settings](https://github.com/ffapb/ffa-jobs-sett
 [packagist](https://packagist.org/packages/minerva22/ffa-jobs-emails)
 
 # Installation
-`composer install ffapb/ffa-jobs-settings-php`
+`composer require ffapb/ffa-jobs-settings-php`
 
 # Usage
 
@@ -27,4 +27,13 @@ To get database credentials (IP, port, username, password, database name)
 $db = new \FfaJobsSettings\Db("http://localhost:8000");
 var_dump($db->getConnectionSettings()); # shows credentials for databases the default "location"
 var_dump($db->getConnectionSettings("Beirut")); # shows credentials for databases in Beirut
+```
+
+# Testing
+
+```
+git clone http://.../ffa-jobs-settings-php
+cd ffa-jobs-settings-php
+composer install
+vendor/bin/phpunit tests
 ```
